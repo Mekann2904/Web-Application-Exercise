@@ -1,4 +1,5 @@
-#避難場所データベース用jsonファイルの指定
+# 避難場所データベース用jsonファイルの指定
 file_path = "evacuation_site.json"
 
-#apiKey
+# APIキーの設定
+api_key = "0cc10e651c9d70f8fa70565a4a081246"

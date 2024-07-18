@@ -1,7 +1,11 @@
-const apiKey = '0cc10e651c9d70f8fa70565a4a081246';
 const city = 'Tokyo';
 
 async function fetchWeatherData() {
+    // APIキーを取得
+    const apiKeyResponse = await fetch('/get_api_key');
+    const apiKeyData = await apiKeyResponse.json();
+    const apiKey = apiKeyData.apiKey;
+
     const todayResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
     const todayData = await todayResponse.json();
 
