@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="left">
+        <div class="weather-info">
+            <iframe src="{{ url_for('weather_info') }}" class="iframe-full"></iframe>
+        </div>
+        <div class="disaster-prevention-links">
+            <iframe src="{{ url_for('disaster_prevention_links') }}" class="iframe-full"></iframe>
+        </div>
+    </div>
+    <div class="right">
+        <div class="route-info">
+            <iframe src="{{ url_for('route_info') }}" class="iframe-full"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}
