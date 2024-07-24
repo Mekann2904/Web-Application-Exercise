@@ -18,9 +18,9 @@ async function address_search() {
         if (data.length === 0) {
             throw new Error('指定された住所に対する結果が見つかりませんでした');
         }
-        const [lon, lat] = data[0].geometry.coordinates;
-        console.log(`緯度: ${lat}, 経度: ${lon}`);
-        return { lat, lon };
+        const [lon1, lat2] = data[0].geometry.coordinates;
+        console.log(`緯度: ${lat1}, 経度: ${lon2}`);
+        return { lat1, lon2 };
     } catch (error) {
         console.error('住所データの取得エラー:', error);
         return null;
