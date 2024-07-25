@@ -116,22 +116,6 @@ body {
 }
 
 
-.btn--orange {
-    color: #fff; /* テキストカラーを白に設定 */
-    background-color: #eb6100; /* 背景色をオレンジ色に設定 */
-    padding: 10px 20px; /* パディングを追加 */
-    border: none; /* ボーダーを削除 */
-    border-radius: 5px; /* 角を丸くする */
-    text-align: center; /* テキストを中央揃え */
-    text-decoration: none; /* テキストの下線を削除 */
-    display: inline-block; /* インラインブロック要素に設定 */
-    font-size: 16px; /* フォントサイズを設定 */
-}
-
-.btn--orange:hover {
-    background-color: #f56500; /* ホバー時の背景色を変更 */
-}
-
 .header-content {
     display: flex;
     align-items: center;
