@@ -1,6 +1,7 @@
 from flask import render_template
 from flask import Flask, jsonify
 import config
+import sqlite3
 
 
 def init_routes(app):
@@ -27,4 +28,13 @@ def init_routes(app):
     @app.route('/get_api_key')
     def get_api_key():
         return jsonify({"apiKey": config.api_key})
-
+    
+    @app.route('/get_names')
+    def get_names():
+        # SQLiteデータベースに接続して`名称`列のデータを取得
+        conn = sqlite3.connect('static/db/Shelter.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT 名称 FROM your_table_name")
+        names = [row[0] for row in cursor.fetchall()]
+        conn.close()
+        return jsonify(names)
