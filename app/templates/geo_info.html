@@ -3,13 +3,7 @@
 
 {% block content %}
 <h1>SQLite Database Viewer</h1>
-<input type="file" id="dbfile" />
 <pre id="output"></pre>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
-<script>
-    var table_name = "{{ table_name }}"; // テーブル名をPythonから渡す
-</script>
 <script src="{{ url_for('static', filename='js/dbviewer.js') }}"></script>
-<script src="{{ url_for('static', filename='js/sokuchi_surveycalc.js') }}"></script>
 {% endblock %}

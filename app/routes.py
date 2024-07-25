@@ -32,9 +32,9 @@ def init_routes(app):
     @app.route('/get_names')
     def get_names():
         # SQLiteデータベースに接続して`名称`列のデータを取得
-        conn = sqlite3.connect('static/db/Shelter.db')
+        conn = sqlite3.connect('shelters.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT 名称 FROM your_table_name")
+        cursor.execute("SELECT 名称 FROM shelters")
         names = [row[0] for row in cursor.fetchall()]
         conn.close()
         return jsonify(names)
