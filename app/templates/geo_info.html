@@ -3,17 +3,15 @@
 
 {% block content %}
 <h1>避難所情報</h1>
-<table id="shelter-table" border="1">
-    <thead>
-        <tr>
-            <th>名称</th>
-            <th>ここからの距離</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- JavaScriptによって動的に埋め込まれます -->
-    </tbody>
-</table>
-
+<div class="evacuation-info">
+    <div class="evacuation-locations">
+        <table id="shelter-table" class="location-table">
+            <tbody>
+                <!-- JavaScriptによって動的に埋め込まれます -->
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="{{ url_for('static', filename='js/dbviewer.js') }}"></script>
+<link rel="stylesheet" href="geo_info.css">
 {% endblock %}
