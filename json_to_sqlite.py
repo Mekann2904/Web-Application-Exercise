@@ -71,11 +71,13 @@ def main():
     # JSONファイルのパスを指定
     file_path = 'evacuation_site.json'
     db_path = 'shelters.db'
+    db_path2 = 'database.db'
 
     data_list = load_json_file(file_path)
     
     # データベースの初期化
     initialize_database(db_path)
+    initialize_database(db_path2)
     
     # データの保存
     save_data_to_sqlite(data_list, db_path)
