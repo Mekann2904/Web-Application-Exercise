@@ -4,31 +4,44 @@ window.onload = function() {
         .then(response => response.json())
         .then(names => {
             console.log("Names received:", names);
-            let tableBody = document.getElementById('shelter-table').getElementsByTagName('tbody')[0];
+            let shelters = [];
 
             names.forEach(function(name) {
-                let row = document.createElement('tr');
+                shelters.push({ name: name, distance: null, retries: 3 });
+            });
 
-                let nameCell = document.createElement('td');
-                nameCell.textContent = name;
-                row.appendChild(nameCell);
+            function updateTable() {
+                let tableBody = document.getElementById('shelter-table').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = "";
 
-                let distanceCell = document.createElement('td');
-                distanceCell.textContent = "計算中..."; // 初期表示
-                row.appendChild(distanceCell);
+                shelters.sort((a, b) => a.distance - b.distance);
 
-                tableBody.appendChild(row);
+                shelters.forEach(function(shelter) {
+                    let row = document.createElement('tr');
 
-                // 東京の緯度経度を取得
-                fetch(`/address_search/東京`)
+                    let nameCell = document.createElement('td');
+                    nameCell.textContent = shelter.name;
+                    row.appendChild(nameCell);
+
+                    let distanceCell = document.createElement('td');
+                    distanceCell.textContent = shelter.distance !== null ? `距離: ${shelter.distance} km` : "取得中";
+                    row.appendChild(distanceCell);
+
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function fetchDistanceAndAzimuth(shelter) {
+                // 那覇の緯度経度を取得
+                fetch(`/address_search/那覇`)
                     .then(response => response.json())
                     .then(cityCoords => {
                         console.log("City coordinates:", cityCoords);
                         // 避難所の緯度経度を取得
-                        fetch(`/get_coordinates/${name}`)
+                        fetch(`/get_coordinates/${shelter.name}`)
                             .then(response => response.json())
                             .then(shelterCoords => {
-                                console.log("Shelter coordinates for", name, ":", shelterCoords);
+                                console.log("Shelter coordinates for", shelter.name, ":", shelterCoords);
                                 // 距離と方位角を計算
                                 fetch('/calculate_distance', {
                                     method: 'POST',
@@ -45,23 +58,52 @@ window.onload = function() {
                                 .then(response => response.json())
                                 .then(result => {
                                     console.log("Distance and azimuths:", result);
-                                    distanceCell.textContent = `距離: ${result.distance}, 方位角1: ${result.azimuth1}, 方位角2: ${result.azimuth2}`;
+                                    let distanceKm = (parseFloat(result.distance) / 1000).toFixed(1); // メートルからキロメートルに変換し、少数第一位まで丸める
+
+                                    if (isNaN(distanceKm) || result.azimuth1 === 'N/A' || result.azimuth2 === 'N/A') {
+                                        if (shelter.retries > 0) {
+                                            console.warn(`Retrying... (${3 - shelter.retries + 1}/3)`);
+                                            setTimeout(() => {
+                                                shelter.retries--;
+                                                fetchDistanceAndAzimuth(shelter);
+                                            }, 3000); // 3秒待つ
+                                        } else {
+                                            shelter.distance = null;
+                                            updateTable();
+                                        }
+                                    } else {
+                                        shelter.distance = distanceKm;
+                                        updateTable();
+                                    }
                                 })
                                 .catch(error => {
                                     console.error("Distance calculation error:", error);
-                                    distanceCell.textContent = "距離の計算エラー";
+                                    if (shelter.retries > 0) {
+                                        console.warn(`Retrying... (${3 - shelter.retries + 1}/3)`);
+                                        setTimeout(() => {
+                                            shelter.retries--;
+                                            fetchDistanceAndAzimuth(shelter);
+                                        }, 3000); // 3秒待つ
+                                    } else {
+                                        shelter.distance = null;
+                                        updateTable();
+                                    }
                                 });
                             })
                             .catch(error => {
                                 console.error("Shelter coordinates error:", error);
-                                distanceCell.textContent = "避難所の座標取得エラー";
+                                shelter.distance = null;
+                                updateTable();
                             });
                     })
                     .catch(error => {
                         console.error("City coordinates error:", error);
-                        distanceCell.textContent = "都市の座標取得エラー";
+                        shelter.distance = null;
+                        updateTable();
                     });
-            });
+            }
+
+            shelters.forEach(shelter => fetchDistanceAndAzimuth(shelter));
         })
         .catch(error => {
             console.error("Fetch error:", error);
