@@ -1,11 +1,69 @@
 window.onload = function() {
+    console.log("Window loaded");
     fetch('/get_names')
         .then(response => response.json())
-        .then(data => {
-            let output = "";
-            data.forEach(function(name) {
-                output += name + "\n";
+        .then(names => {
+            console.log("Names received:", names);
+            let tableBody = document.getElementById('shelter-table').getElementsByTagName('tbody')[0];
+
+            names.forEach(function(name) {
+                let row = document.createElement('tr');
+
+                let nameCell = document.createElement('td');
+                nameCell.textContent = name;
+                row.appendChild(nameCell);
+
+                let distanceCell = document.createElement('td');
+                distanceCell.textContent = "計算中..."; // 初期表示
+                row.appendChild(distanceCell);
+
+                tableBody.appendChild(row);
+
+                // 東京の緯度経度を取得
+                fetch(`/address_search/東京`)
+                    .then(response => response.json())
+                    .then(cityCoords => {
+                        console.log("City coordinates:", cityCoords);
+                        // 避難所の緯度経度を取得
+                        fetch(`/get_coordinates/${name}`)
+                            .then(response => response.json())
+                            .then(shelterCoords => {
+                                console.log("Shelter coordinates for", name, ":", shelterCoords);
+                                // 距離と方位角を計算
+                                fetch('/calculate_distance', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        lat1: cityCoords.lat,
+                                        lon1: cityCoords.lon,
+                                        lat2: shelterCoords.latitude,
+                                        lon2: shelterCoords.longitude
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    console.log("Distance and azimuths:", result);
+                                    distanceCell.textContent = `距離: ${result.distance}, 方位角1: ${result.azimuth1}, 方位角2: ${result.azimuth2}`;
+                                })
+                                .catch(error => {
+                                    console.error("Distance calculation error:", error);
+                                    distanceCell.textContent = "距離の計算エラー";
+                                });
+                            })
+                            .catch(error => {
+                                console.error("Shelter coordinates error:", error);
+                                distanceCell.textContent = "避難所の座標取得エラー";
+                            });
+                    })
+                    .catch(error => {
+                        console.error("City coordinates error:", error);
+                        distanceCell.textContent = "都市の座標取得エラー";
+                    });
             });
-            document.getElementById('output').textContent = output;
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
         });
 };
