@@ -1,99 +1,152 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #ffffff;
+	font-family: Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #ffffff;
 }
 
 .title {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #000000;
+	font-size: 36px;
+	margin-bottom: 20px;
+	color: #000000;
+	margin-top: 30px;
+	/* テスト的に。「天気予報」の文字をずらす */
 }
 
 .weather-container {
-    display: flex;
-    gap: 20px;
+	display: flex;
+	gap: 20px;
 }
 
 .weather-card {
-    width: 200px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 200px;
+	padding: 20px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	text-align: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .weather-icon {
-    width: 100%;
-    height: 100px;
-    background-color: #c0c0c0;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #ffffff;
+	width: 100%;
+	height: 100px;
+	background-color: #c0c0c0;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	font-size: 18px;
+	color: #ffffff;
 }
 
-.temperature, .humidity, .weather-condition {
-    font-size: 24px;
-    font-weight: bold;
-    color: #d32f2f;
+.temperature,
+.humidity,
+.weather-condition {
+	font-size: 24px;
+	font-weight: bold;
+	color: #d32f2f;
 }
 
-.disaster_prevention_links_container{
-    background-color: bisque;
+.disaster_prevention_links_container {
+	background-color: bisque;
 }
 
 
 /*  */
 
 .content {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px; /* ページ内の余白を追加 */
-    width:90%
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	/* ページ内の余白を追加 */
+	width: 90%
 }
 
 .left {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 各セクション間のスペースを指定 */
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	/* 各セクション間のスペースを指定 */
 }
 
 .right {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 各セクション間のスペースを指定 */
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	/* 各セクション間のスペースを指定 */
 }
 
 .iframe-full {
-    width:100%;
-    height: 500px; /* 必要に応じて高さを調整 */
-    border: none;
+	width: 100%;
+	height: 500px;
+	/* 必要に応じて高さを調整 */
+	border: none;
 }
 
 .btn--orange {
-    color: #fff; /* テキストカラーを白に設定 */
-    background-color: #eb6100; /* 背景色をオレンジ色に設定 */
-    padding: 10px 20px; /* パディングを追加 */
-    border: none; /* ボーダーを削除 */
-    border-radius: 5px; /* 角を丸くする */
-    text-align: center; /* テキストを中央揃え */
-    text-decoration: none; /* テキストの下線を削除 */
-    display: inline-block; /* インラインブロック要素に設定 */
-    font-size: 16px; /* フォントサイズを設定 */
-  }
-  
-  .btn--orange:hover {
-    background-color: #f56500; /* ホバー時の背景色を変更 */
-  }
+	color: #fff;
+	/* テキストカラーを白に設定 */
+	background-color: #eb6100;
+	/* 背景色をオレンジ色に設定 */
+	padding: 10px 20px;
+	/* パディングを追加 */
+	border: none;
+	/* ボーダーを削除 */
+	border-radius: 5px;
+	/* 角を丸くする */
+	text-align: center;
+	/* テキストを中央揃え */
+	text-decoration: none;
+	/* テキストの下線を削除 */
+	display: inline-block;
+	/* インラインブロック要素に設定 */
+	font-size: 16px;
+	/* フォントサイズを設定 */
+}
+
+.btn--orange:hover {
+	background-color: #f56500;
+	/* ホバー時の背景色を変更 */
+}
+
+
+/* index.htmlの検索窓実装 */
+.search-container {
+	/* margin-bottom: 20px; */
+	margin-top: 25pt;
+	/* 下にずらす */
+	display: flex;
+	margin-left: 20px;
+	/* 右にずらす */
+}
+
+#location-search {
+	width: 100%;
+	/* 検索窓の幅を広げる */
+	padding: 10px;
+	/* 内側の余白を追加 */
+	font-size: 13px;
+	/* フォントサイズを大きくする */
+}
+
+.search-container button {
+	padding: 10px;
+	/* ボタンの内側の余白を追加 */
+	font-size: 13px;
+	/* ボタンのフォントサイズを大きくする */
+	margin-left: 10px;
+	/* 検索窓との間にスペースを追加 */
+}
+
+/* 「天気予報」を下にずらす */
+.weather-title {
+	margin-top: 20px;
+	/* 上に20pxの余白を追加 */
+}
