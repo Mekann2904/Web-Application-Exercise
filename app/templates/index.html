@@ -16,4 +16,11 @@
 			<iframe src="{{ url_for('route_info') }}" class="iframe-full"></iframe>
 		</div>
 	</div>
-</div>{% endblock %}
+</div>
+<script>
+	function searchLocation() {
+		const location = document.getElementById('location-search').value;
+		// ここで位置情報を検索するコード追加？
+		alert('検索中: ' + location);
+	}
+</script> {% endblock %}
