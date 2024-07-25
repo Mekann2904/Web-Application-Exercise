@@ -7,7 +7,7 @@ window.onload = function() {
             let shelters = [];
 
             names.forEach(function(name) {
-                shelters.push({ name: name, distance: null, retries: 3 });
+                shelters.push({ name: name, distance: null, retries: 100 });
             });
 
             function updateTable() {
@@ -32,7 +32,7 @@ window.onload = function() {
             }
 
             function fetchDistanceAndAzimuth(shelter, city) {
-                // 那覇の緯度経度を取得
+                // /get_last_locationから取得した都市名の緯度経度を取得
                 fetch(`/address_search/${city}`)
                     .then(response => response.json())
                     .then(cityCoords => {
@@ -62,11 +62,11 @@ window.onload = function() {
 
                                     if (isNaN(distanceKm) || result.azimuth1 === 'N/A' || result.azimuth2 === 'N/A') {
                                         if (shelter.retries > 0) {
-                                            console.warn(`Retrying... (${3 - shelter.retries + 1}/3)`);
+                                            console.warn(`Retrying... (${10 - shelter.retries + 1}/10)`);
                                             setTimeout(() => {
                                                 shelter.retries--;
                                                 fetchDistanceAndAzimuth(shelter, city);
-                                            }, 3000); // 3秒待つ
+                                            }, 1000); // 1秒待つ
                                         } else {
                                             shelter.distance = null;
                                             updateTable();
@@ -79,11 +79,11 @@ window.onload = function() {
                                 .catch(error => {
                                     console.error("Distance calculation error:", error);
                                     if (shelter.retries > 0) {
-                                        console.warn(`Retrying... (${3 - shelter.retries + 1}/3)`);
+                                        console.warn(`Retrying... (${10 - shelter.retries + 1}/10)`);
                                         setTimeout(() => {
                                             shelter.retries--;
                                             fetchDistanceAndAzimuth(shelter, city);
-                                        }, 3000); // 3秒待つ
+                                        }, 100); // 1秒待つ
                                     } else {
                                         shelter.distance = null;
                                         updateTable();
@@ -107,7 +107,8 @@ window.onload = function() {
                 .then(response => response.json())
                 .then(data => {
                     console.log("Last location received:", data.location);
-                    shelters.forEach(shelter => fetchDistanceAndAzimuth(shelter, data.location));
+                    const city = data.location;  // 取得した都市名を保存
+                    shelters.forEach(shelter => fetchDistanceAndAzimuth(shelter, city));
                 })
                 .catch(error => {
                     console.error("Fetch last location error:", error);
