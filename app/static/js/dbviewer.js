@@ -31,9 +31,9 @@ window.onload = function() {
                 });
             }
 
-            function fetchDistanceAndAzimuth(shelter) {
+            function fetchDistanceAndAzimuth(shelter, city) {
                 // 那覇の緯度経度を取得
-                fetch(`/address_search/那覇`)
+                fetch(`/address_search/${city}`)
                     .then(response => response.json())
                     .then(cityCoords => {
                         console.log("City coordinates:", cityCoords);
@@ -65,7 +65,7 @@ window.onload = function() {
                                             console.warn(`Retrying... (${3 - shelter.retries + 1}/3)`);
                                             setTimeout(() => {
                                                 shelter.retries--;
-                                                fetchDistanceAndAzimuth(shelter);
+                                                fetchDistanceAndAzimuth(shelter, city);
                                             }, 3000); // 3秒待つ
                                         } else {
                                             shelter.distance = null;
@@ -82,7 +82,7 @@ window.onload = function() {
                                         console.warn(`Retrying... (${3 - shelter.retries + 1}/3)`);
                                         setTimeout(() => {
                                             shelter.retries--;
-                                            fetchDistanceAndAzimuth(shelter);
+                                            fetchDistanceAndAzimuth(shelter, city);
                                         }, 3000); // 3秒待つ
                                     } else {
                                         shelter.distance = null;
@@ -103,7 +103,15 @@ window.onload = function() {
                     });
             }
 
-            shelters.forEach(shelter => fetchDistanceAndAzimuth(shelter));
+            fetch('/get_last_location')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Last location received:", data.location);
+                    shelters.forEach(shelter => fetchDistanceAndAzimuth(shelter, data.location));
+                })
+                .catch(error => {
+                    console.error("Fetch last location error:", error);
+                });
         })
         .catch(error => {
             console.error("Fetch error:", error);
