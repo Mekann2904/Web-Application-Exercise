@@ -1,12 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
     margin: 0;
     background-color: #ffffff;
+    overflow: hidden; /* 全体のスクロールを無効にする */
 }
 
 .title {
@@ -21,7 +17,7 @@ body {
 }
 
 .weather-card {
-    width: 200px;
+    width: 250px; /* カードの幅を調整 */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -31,7 +27,7 @@ body {
 
 .weather-icon {
     width: 100%;
-    height: 100px;
+    height: 150px; /* アイコンの高さを調整 */
     background-color: #c0c0c0;
     border-radius: 10px;
     display: flex;
@@ -48,39 +44,77 @@ body {
     color: #d32f2f;
 }
 
-.disaster_prevention_links_container{
+.disaster_prevention_links_container {
     background-color: bisque;
+    padding: 20px;
+    margin-top: 20px; /* 上部に余白を追加 */
+    width: 100%;
 }
-
-
-/*  */
 
 .content {
     display: flex;
     justify-content: space-between;
-    padding: 20px; /* ページ内の余白を追加 */
-    width:90%
+    width: 100%; /* 全幅に調整 */
+    max-width: 1200px; /* 最大幅を設定 */
+    margin-top: 50px; /* ヘッダーとの間にスペースを追加 */
+    height: calc(100vh - 100px); /* 画面の高さを調整 */
+    overflow: hidden; /* 全体のスクロールを無効にする */
 }
 
 .left {
-    width: 70%;
+    width: 70%; /* 左カラムの幅を調整 */
     display: flex;
     flex-direction: column;
     gap: 20px; /* 各セクション間のスペースを指定 */
 }
 
 .right {
-    width: 30%;
+    width: 30%; /* 右カラムの幅を調整 */
     display: flex;
     flex-direction: column;
     gap: 20px; /* 各セクション間のスペースを指定 */
+    height: 100%;
+    overflow: hidden; /* 右カラムの全体スクロールを無効にする */
+}
+
+.evacuation-info {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.evacuation-info h2 {
+    position: sticky;
+    top: 0;
+    background-color: #e0f7fa;
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.evacuation-locations {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: calc(100% - 48px); /* タイトルの高さ分を引いた高さに調整 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
+}
+
+.location {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .iframe-full {
-    width:100%;
-    height: 500px; /* 必要に応じて高さを調整 */
+    width: 100%;
+    height: 400px; /* 高さを調整 */
     border: none;
 }
+
 
 .btn--orange {
     color: #fff; /* テキストカラーを白に設定 */
@@ -92,8 +126,40 @@ body {
     text-decoration: none; /* テキストの下線を削除 */
     display: inline-block; /* インラインブロック要素に設定 */
     font-size: 16px; /* フォントサイズを設定 */
-  }
-  
-  .btn--orange:hover {
+}
+
+.btn--orange:hover {
     background-color: #f56500; /* ホバー時の背景色を変更 */
-  }
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-content .icon {
+    width: 40px; /* アイコンのサイズを調整 */
+    height: 40px; /* アイコンのサイズを調整 */
+    margin-right: 10px; /* アイコンとテキストの間にスペースを追加 */
+}
+
+.header-content h1 {
+    font-size: 32px;
+    color: #000000;
+    margin: 0;
+}
+
+.weather-forecast, .evacuation-info {
+    margin-bottom: 20px; /* 各セクションの間にスペースを追加 */
+}
+
+.weather-forecast h2, .evacuation-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.weather-cards {
+    display: flex;
+    gap: 10px; /* 天気カードの間にスペースを追加 */
+}
