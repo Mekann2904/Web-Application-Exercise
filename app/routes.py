@@ -16,7 +16,9 @@ def init_routes(app):
     def route_info():
         return render_template('route_info.html')
     
-    
+    @app.route('/geo_info')
+    def geo_info():
+        return render_template('geo_info.html')
 
     @app.route('/disaster_prevention_links')
     def disaster_prevention_links():
