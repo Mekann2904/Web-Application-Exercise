@@ -3,7 +3,17 @@
 
 {% block content %}
 <h1>避難所情報</h1>
-<pre id="output"></pre>
+<table id="shelter-table" border="1">
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>ここからの距離</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- JavaScriptによって動的に埋め込まれます -->
+    </tbody>
+</table>
 
 <script src="{{ url_for('static', filename='js/dbviewer.js') }}"></script>
 {% endblock %}
