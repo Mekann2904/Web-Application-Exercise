@@ -44,7 +44,9 @@ def initialize_database(db_path):
             災害種別_高波 TEXT,
             災害種別_地割れ TEXT,
             災害種別_津波 TEXT,
-            指定避難所 TEXT
+            指定避難所 TEXT,
+            latitude REAL,
+            longitude REAL
         )
         ''')
 
@@ -59,6 +61,9 @@ def save_data_to_sqlite(data_list, db_path):
     df = pd.DataFrame(data_list)
     df.fillna('不明', inplace=True)
 
+    # データフレームの内容を確認する
+    print(df)
+
     with sqlite3.connect(db_path) as conn:
         df.to_sql('shelters', conn, if_exists='append', index=False)
 
@@ -66,11 +71,13 @@ def main():
     # JSONファイルのパスを指定
     file_path = 'evacuation_site.json'
     db_path = 'shelters.db'
+    db_path2 = 'database.db'
 
     data_list = load_json_file(file_path)
     
     # データベースの初期化
     initialize_database(db_path)
+    initialize_database(db_path2)
     
     # データの保存
     save_data_to_sqlite(data_list, db_path)

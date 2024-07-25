@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #ffffff;
+    overflow: hidden; /* 全体のスクロールを無効にする */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.btn--orange {
+    color: #fff; /* テキストカラーを白に設定 */
+    background-color: #eb6100; /* 背景色をオレンジ色に設定 */
+    padding: 10px 20px; /* パディングを追加 */
+    border: none; /* ボーダーを削除 */
+    border-radius: 5px; /* 角を丸くする */
+    text-align: center; /* テキストを中央揃え */
+    text-decoration: none; /* テキストの下線を削除 */
+    display: inline-block; /* インラインブロック要素に設定 */
+    font-size: 16px; /* フォントサイズを設定 */
+    transition: background-color 0.3s ease; /* 背景色の遷移を追加 */
+}
+
+.btn--orange:hover {
+    background-color: #f56500; /* ホバー時の背景色を変更 */
+}
+
+@media (max-width: 600px) {
+    .btn--orange {
+        font-size: 14px; /* 小さい画面用にフォントサイズを調整 */
+        padding: 8px 16px; /* パディングを調整 */
+    }
+}

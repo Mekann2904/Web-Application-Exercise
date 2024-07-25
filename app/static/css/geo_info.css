@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #ffffff;
+    overflow: hidden; /* 全体のスクロールを無効にする */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 36px;
+}
+
+.evacuation-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    height: calc(100vh - 100px); /* 画面の高さを調整 */
+}
+
+.evacuation-info h2 {
+    position: sticky;
+    top: 0;
+    background-color: #e0f7fa;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    z-index: 1;
+}
+
+.evacuation-locations {
+    width: 100%;
+    height: calc(100% - 48px); /* タイトルの高さ分を引いた高さに調整 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.location-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.location-table th, .location-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.location-table th {
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}

@@ -2,8 +2,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>SQLite Database Viewer</h1>
-<pre id="output"></pre>
-
+<h1>避難所情報</h1>
+<div class="evacuation-info">
+    <div class="evacuation-locations">
+        <table id="shelter-table" class="location-table">
+            <tbody>
+                <!-- JavaScriptによって動的に埋め込まれます -->
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="{{ url_for('static', filename='js/dbviewer.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/geo-info.css') }}">
 {% endblock %}
