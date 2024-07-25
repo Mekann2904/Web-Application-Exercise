@@ -5,8 +5,12 @@ import requests
 from bs4 import BeautifulSoup
 import config
 import json
+from unidecode import unidecode
 
 app = Flask(__name__)
+
+# Geonamesのユーザー名を設定
+GEONAMES_USERNAME = 'mekann'  # ここにGeonamesのユーザー名を入力
 
 def init_routes(app):
     @app.route('/')
@@ -115,6 +119,59 @@ def init_routes(app):
         except Exception as e:
             logging.error(f"Error retrieving address data: {e}")
             return jsonify({"error": str(e)})
+        
+
+    @app.route('/save_location', methods=['POST'])
+    def save_location():
+        data = request.get_json()
+        location = data.get('location')
+        
+        # Save location to SQLite
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY, location TEXT)')
+        cursor.execute('INSERT INTO locations (location) VALUES (?)', (location,))
+        conn.commit()
+        conn.close()
+        
+        return jsonify({"message": "Location saved successfully!"})
+    
+    @app.route('/get_last_location', methods=['GET'])
+    def get_last_location():
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT location FROM locations ORDER BY id DESC LIMIT 1')
+        last_location = cursor.fetchone()
+        conn.close()
+        
+        if last_location:
+            return jsonify({"location": last_location[0]})
+        else:
+            return jsonify({"location": "那覇"})
+        
+
+    @app.route('/get_location_romaji', methods=['GET'])
+    def get_location_romaji():
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT location FROM locations ORDER BY id DESC LIMIT 1')
+        last_location = cursor.fetchone()
+        conn.close()
+        
+        if last_location:
+            location = last_location[0]
+            response = requests.get(f'http://api.geonames.org/searchJSON?q={location}&maxRows=1&username={GEONAMES_USERNAME}')
+            data = response.json()
+            if 'geonames' in data and len(data['geonames']) > 0:
+                location_romaji = data['geonames'][0]['name']
+                return jsonify({"location_romaji": location_romaji})
+            else:
+                return jsonify({"error": "Location not found in Geonames"})
+        else:
+            return jsonify({"location_romaji": "Naha"})
+
+
+
 
 init_routes(app)
 
