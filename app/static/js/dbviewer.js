@@ -1,9 +1,8 @@
-document.getElementById('dbfile').addEventListener('change', function(event) {
-    let file = event.target.files[0];
-    if (file) {
-        let reader = new FileReader();
-        reader.onload = function() {
-            let Uints = new Uint8Array(reader.result);
+window.onload = function() {
+    fetch('shelter.db')
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            let Uints = new Uint8Array(data);
             initSqlJs().then(function(SQL) {
                 let db = new SQL.Database(Uints);
                 // テーブル名を指定してデータを取得
@@ -27,7 +26,5 @@ document.getElementById('dbfile').addEventListener('change', function(event) {
                 // 結果を表示
                 document.getElementById('output').textContent = output;
             });
-        };
-        reader.readAsArrayBuffer(file);
-    }
-});
+        });
+};
