@@ -40,7 +40,7 @@ h1 {
 .evacuation-locations {
     width: 100%;
     height: calc(100% - 48px); /* タイトルの高さ分を引いた高さに調整 */
-    overflow-y: scroll; /* 縦スクロールを有効にする */
+    overflow-y: auto; /* 縦スクロールを有効にする */
     background-color: #e0f7fa;
     padding: 20px;
     /* border-radius: 10px;
@@ -64,24 +64,3 @@ h1 {
     z-index: 1;
 }
 
-/* スクロールバーの全体のスタイル */
-::-webkit-scrollbar {
-    width: 12px; /* スクロールバーの幅 */
-}
-
-/* スクロールバーのトラック（背景）のスタイル */
-::-webkit-scrollbar-track {
-    background: #e30707; /* トラックの背景色 */
-    border-radius: 10px; /* 角の丸み */
-}
-
-/* スクロールバーのハンドル（つまみ）のスタイル */
-::-webkit-scrollbar-thumb {
-    background: #888; /* ハンドルの色 */
-    border-radius: 10px; /* 角の丸み */
-}
-
-/* ハンドルにマウスをホバーしたときのスタイル */
-::-webkit-scrollbar-thumb:hover {
-    background: #555; /* ハンドルの色（ホバー時） */
-}
