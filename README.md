@@ -18,12 +18,21 @@
 
 ## 目次
 
-1. [プロジェクトについて](#プロジェクトについて)
-2. [環境](#環境)
-3. [ディレクトリ構成](#ディレクトリ構成)
-4. [開発環境構築](#開発環境構築)
-5. [詳細設計](#詳細設計)
-6. [トラブルシューティング](#トラブルシューティング)
+- [防災アプリケーション](#防災アプリケーション)
+  - [使用技術一覧](#使用技術一覧)
+  - [目次](#目次)
+  - [プロジェクトについて](#プロジェクトについて)
+  - [環境](#環境)
+  - [ディレクトリ構成](#ディレクトリ構成)
+  - [開発環境構築](#開発環境構築)
+  - [詳細設計](#詳細設計)
+    - [システム構成図](#システム構成図)
+    - [ソフトウェア構成図](#ソフトウェア構成図)
+    - [機能設計](#機能設計)
+    - [画面設計](#画面設計)
+    - [データベース設計](#データベース設計)
+    - [処理フロー](#処理フロー)
+  - [トラブルシューティング](#トラブルシューティング)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
@@ -226,12 +235,14 @@ sequenceDiagram
     participant SQLite
     participant WeatherDisplayScreen
     participant Server
+    participant GeoNames API
     participant WeatherAPI
 
     User->>SQLite: 地理情報を保存
     SQLite->>WeatherDisplayScreen: 地理情報の送信
-    WeatherDisplayScreen->>Server: 天気情報取得要求 (地理情報付き)
-    Server->>WeatherAPI: 天気情報取得要求
+    WeatherDisplayScreen->>Server: 土地名
+    Server->>GeoNames API:土地名
+    GeoNames API->>WeatherAPI:土地名(ローマ字)天気情報要求
     WeatherAPI->>Server: 天気情報のレスポンス
     Server->>WeatherDisplayScreen: 天気情報の送信
     WeatherDisplayScreen->>User: 天気情報を表示
