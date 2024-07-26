@@ -3,6 +3,8 @@ body {
     margin: 0;
     background-color: #ffffff;
     overflow: hidden; /* 全体のスクロールを無効にする */
+    transform: scale(0.9);
+    border-radius: 10px; /* 角を丸く設定 */
 }
 
 h1 {
@@ -38,11 +40,11 @@ h1 {
 .evacuation-locations {
     width: 100%;
     height: calc(100% - 48px); /* タイトルの高さ分を引いた高さに調整 */
-    overflow-y: auto; /* 縦スクロールを有効にする */
+    overflow-y: scroll; /* 縦スクロールを有効にする */
     background-color: #e0f7fa;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .location-table {
@@ -60,4 +62,26 @@ h1 {
     position: sticky;
     top: 0;
     z-index: 1;
+}
+
+/* スクロールバーの全体のスタイル */
+::-webkit-scrollbar {
+    width: 12px; /* スクロールバーの幅 */
+}
+
+/* スクロールバーのトラック（背景）のスタイル */
+::-webkit-scrollbar-track {
+    background: #e30707; /* トラックの背景色 */
+    border-radius: 10px; /* 角の丸み */
+}
+
+/* スクロールバーのハンドル（つまみ）のスタイル */
+::-webkit-scrollbar-thumb {
+    background: #888; /* ハンドルの色 */
+    border-radius: 10px; /* 角の丸み */
+}
+
+/* ハンドルにマウスをホバーしたときのスタイル */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* ハンドルの色（ホバー時） */
 }

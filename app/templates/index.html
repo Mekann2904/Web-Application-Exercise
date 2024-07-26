@@ -2,27 +2,35 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="content">
+    <!-- 検索コンテナ。位置情報検索用の入力フィールドとボタンを含む -->
     <div class="search-container" style="position: absolute; top: 10px; left: 10px;">
         <input type="text" id="location-search" placeholder="位置情報を検索..." />
-        <button onclick="searchLocation()">検索</button>
+        <button class="custom-button" onclick="searchLocation()">検索</button>
     </div>
     <div class="left">
+        <!-- 天気情報のiframe -->
         <div class="weather-info">
             <iframe src="{{ url_for('weather_info') }}" class="iframe-full"></iframe>
         </div>
-        <div class="disaster-prevention-links">
-            <iframe src="{{ url_for('disaster_prevention_links') }}" class="iframe-full"></iframe>
+        <!-- 災害防止リンクのiframe -->
+        <div class="disaster-prevention-links-container">
+            <div class="disaster-prevention-links">
+                <iframe src="{{ url_for('disaster_prevention_links') }}" class="iframe-full"></iframe>
+            </div>
         </div>
     </div>
     <div class="right">
+        <!-- 地理情報のiframe -->
         <div class="geo-info">
             <iframe src="{{ url_for('geo_info') }}" class="iframe-full"></iframe>
         </div>
+        <!-- ルート情報のiframe
         <div class="route-info">
             <iframe src="{{ url_for('route_info') }}" class="iframe-full"></iframe>
-        </div>
+        </div> -->
     </div>
 </div>
+<!-- 外部CSSとJSファイルの読み込み -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="{{ url_for('static', filename='js/style.js') }}"></script>
 <script src="{{ url_for('static', filename='js/city.js') }}"></script>

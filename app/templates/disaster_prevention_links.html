@@ -3,6 +3,12 @@
 
 {% block content %}
 
+<style>
+    body {
+        background-color: bisque;
+    }
+</style>
+
 <div class="disaster_prevention_links_container">
     <div class="link-section">
         <h2>国土交通省 防災ポータル</h2>
@@ -19,4 +25,5 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/disaster_prevention_links.css') }}">
 {% endblock %}

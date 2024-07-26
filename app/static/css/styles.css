@@ -1,182 +1,229 @@
 body {
-	font-family: Arial, sans-serif;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	margin: 0;
-	background-color: #ffffff;
-	overflow: hidden;
-	/* 全体のスクロールを無効にする */
+    font-family: Arial, sans-serif; /* フォントファミリーの設定 */
+    display: flex;
+    flex-direction: column; /* 縦方向に要素を配置 */
+    align-items: center; /* 中央に揃える */
+    justify-content: center; /* 中央に揃える */
+    height: 100vh; /* ビューポートの高さを100%に設定 */
+    margin: 0; /* マージンを0に設定 */
+    background-color: #ffffff; /* 背景色を白に設定 */
+    overflow: hidden; /* 全体のスクロールを無効にする */
 }
 
+.content {
+    display: flex; /* フレックスボックスで配置 */
+    justify-content: space-between; /* 要素間を均等に配置 */
+    width: 100%; /* 幅を100%に設定 */
+    max-width: 1200px; /* 最大幅を1200pxに設定 */
+    height: calc(100vh - 100px); /* ビューポートの高さから100pxを引いた高さに設定 */
+    overflow: hidden; /* 全体のスクロールを無効にする */
+    margin-top: 50px; /* 上部に50pxのマージンを追加 */
+}
+
+.left, .right {
+    display: flex; /* フレックスボックスで配置 */
+    flex-direction: column; /* 縦方向に要素を配置 */
+    gap: 20px; /* 要素間に20pxの隙間を追加 */
+    height: 100%; /* 高さを100%に設定 */
+}
+
+.left {
+    width: 65%; /* 左カラムの幅を70%に設定 */
+}
+
+.weather-info {
+    flex-grow: 3; /* 大きく表示されるように設定 */
+    height: 95%; /* 高さを100%に設定 */
+	padding: 20px; /* 内側の余白を20pxに設定 */
+}
+
+.disaster-prevention-links-container {
+    flex-grow: 1; /* 小さく表示されるように設定 */
+    height: 95%; /* 高さを100%に設定 */
+    border-radius: 10px; /* 角を丸く設定 */
+    overflow: hidden; /* 角を丸めた際に内容が溢れないようにする */
+    background-color: bisque; /* 背景色をビスク色に設定 */
+    padding: 20px; /* 内側の余白を20pxに設定 */
+}
+
+.disaster-prevention-links {
+    width: 100%; /* 幅を100%に設定 */
+    height: 100%; /* 高さを100%に設定 */
+}
+
+.right {
+    width: 30%; /* 右カラムの幅を30%に設定 */
+}
+
+.geo-info {
+    flex-grow: 5; /* 大きく表示されるように設定 */
+    height: 100%; /* 高さを100%に設定 */
+}
+
+.route-info {
+    flex-grow: 1; /* 小さく表示されるように設定 */
+    height: 100%; /* 高さを100%に設定 */
+}
+
+.iframe-full {
+    width: 100%; /* 幅を100%に設定 */
+    height: 100%; /* 高さを100%に設定 */
+    border: none; /* ボーダーをなしに設定 */
+	border-radius: 10px; /* 角を丸く設定 */
+}
+
+/* 以下、その他のスタイル設定 */
+
 .title {
-	font-size: 36px;
-	margin-bottom: 20px;
-	color: #000000;
-	margin-top: 30px;
-	/* テスト的に。「天気予報」の文字をずらす */
+    font-size: 36px; /* フォントサイズを36pxに設定 */
+    margin-bottom: 20px; /* 下部に20pxのマージンを追加 */
+    color: #000000; /* 文字色を黒に設定 */
+    margin-top: 30px; /* 上部に30pxのマージンを追加 */
 }
 
 .weather-container {
-	display: flex;
-	gap: 20px;
+    display: flex; /* フレックスボックスで配置 */
+    gap: 20px; /* 要素間に20pxの隙間を追加 */
 }
 
 .weather-card {
-	width: 250px;
-	/* カードの幅を調整 */
-	padding: 20px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	text-align: center;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px; /* カードの幅を250pxに設定 */
+    padding: 20px; /* 内側の余白を20pxに設定 */
+    background-color: #ffffff; /* 背景色を白に設定 */
+    border-radius: 10px; /* 角を丸く設定 */
+    text-align: center; /* テキストを中央揃えに設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定 */
 }
 
 .weather-icon {
-	width: 100%;
-	height: 150px;
-	/* アイコンの高さを調整 */
-	background-color: #c0c0c0;
-	border-radius: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 10px;
-	font-size: 18px;
-	color: #ffffff;
+    width: 100%; /* 幅を100%に設定 */
+    height: 150px; /* 高さを150pxに設定 */
+    background-color: #c0c0c0; /* 背景色をグレーに設定 */
+    border-radius: 10px; /* 角を丸く設定 */
+    display: flex; /* フレックスボックスで配置 */
+    align-items: center; /* 中央に揃える */
+    justify-content: center; /* 中央に揃える */
+    margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
+    font-size: 18px; /* フォントサイズを18pxに設定 */
+    color: #ffffff; /* 文字色を白に設定 */
 }
 
 .temperature,
 .humidity,
 .weather-condition {
-	font-size: 24px;
-	font-weight: bold;
-	color: #d32f2f;
-}
-
-.disaster_prevention_links_container {
-	background-color: bisque;
-	padding: 20px;
-	margin-top: 20px;
-	/* 上部に余白を追加 */
-	width: 100%;
-}
-
-.content {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	/* 全幅に調整 */
-	max-width: 1200px;
-	/* 最大幅を設定 */
-	margin-top: 50px;
-	/* ヘッダーとの間にスペースを追加 */
-	height: calc(100vh - 100px);
-	/* 画面の高さを調整 */
-	overflow: hidden;
-	/* 全体のスクロールを無効にする */
-}
-
-.left {
-	width: 70%;
-	/* 左カラムの幅を調整 */
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	/* 各セクション間のスペースを指定 */
-}
-
-.right {
-	width: 30%;
-	/* 右カラムの幅を調整 */
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	/* 各セクション間のスペースを指定 */
-	height: 100%;
-	overflow: hidden;
-	/* 右カラムの全体スクロールを無効にする */
+    font-size: 24px; /* フォントサイズを24pxに設定 */
+    font-weight: bold; /* 太字に設定 */
+    color: #d32f2f; /* 文字色を赤に設定 */
 }
 
 .evacuation-info {
-	position: relative;
-	height: 100%;
-	overflow: hidden;
+    position: relative; /* 相対位置に設定 */
+    height: 100%; /* 高さを100%に設定 */
+    overflow: hidden; /* スクロールを無効にする */
 }
 
 .evacuation-info h2 {
-	position: sticky;
-	top: 0;
-	background-color: #e0f7fa;
-	padding: 10px;
-	margin: 0;
-	border-bottom: 1px solid #ccc;
+    position: sticky; /* スクロールに追従する位置に設定 */
+    top: 0; /* 上部に配置 */
+    background-color: #e0f7fa; /* 背景色を淡い青に設定 */
+    padding: 10px; /* 内側の余白を10pxに設定 */
+    margin: 0; /* マージンを0に設定 */
+    border-bottom: 1px solid #ccc; /* 下部にボーダーを追加 */
 }
 
 .evacuation-locations {
-	background-color: #e0f7fa;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	height: calc(100% - 48px);
-	/* タイトルの高さ分を引いた高さに調整 */
-	overflow-y: auto;
-	/* 縦スクロールを有効にする */
+    background-color: #e0f7fa; /* 背景色を淡い青に設定 */
+    padding: 20px; /* 内側の余白を20pxに設定 */
+    border-radius: 10px; /* 角を丸く設定 */
+    height: calc(100% - 48px); /* タイトルの高さ分を引いた高さに調整 */
+    overflow-y: auto; /* 縦スクロールを有効にする */
 }
 
 .location {
-	background-color: #ffffff;
-	padding: 10px;
-	border-radius: 5px;
-	margin-bottom: 10px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* 背景色を白に設定 */
+    padding: 10px; /* 内側の余白を10pxに設定 */
+    border-radius: 5px; /* 角を丸く設定 */
+    margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定 */
 }
-
-.iframe-full {
-	width: 100%;
-	height: 400px;
-	/* 高さを調整 */
-	border: none;
-}
-
 
 .header-content {
-	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
+    display: flex; /* フレックスボックスで配置 */
+    align-items: center; /* 中央に揃える */
+    margin-bottom: 20px; /* 下部に20pxのマージンを追加 */
 }
 
 .header-content .icon {
-	width: 40px;
-	/* アイコンのサイズを調整 */
-	height: 40px;
-	/* アイコンのサイズを調整 */
-	margin-right: 10px;
-	/* アイコンとテキストの間にスペースを追加 */
+    width: 40px; /* アイコンの幅を40pxに設定 */
+    height: 40px; /* アイコンの高さを40pxに設定 */
+    margin-right: 10px; /* 右側に10pxのマージンを追加 */
 }
 
 .header-content h1 {
-	font-size: 32px;
-	color: #000000;
-	margin: 0;
+    font-size: 32px; /* フォントサイズを32pxに設定 */
+    color: #000000; /* 文字色を黒に設定 */
+    margin: 0; /* マージンを0に設定 */
 }
 
 .weather-forecast,
 .evacuation-info {
-	margin-bottom: 20px;
-	/* 各セクションの間にスペースを追加 */
+    margin-bottom: 20px; /* 各セクションの間に20pxのマージンを追加 */
 }
 
 .weather-forecast h2,
 .evacuation-info h2 {
-	font-size: 24px;
-	margin-bottom: 10px;
+    font-size: 24px; /* フォントサイズを24pxに設定 */
+    margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
 }
 
 .weather-cards {
-	display: flex;
-	gap: 10px;
-	/* 天気カードの間にスペースを追加 */
+    display: flex; /* フレックスボックスで配置 */
+    gap: 10px; /* 天気カードの間に10pxの隙間を追加 */
+}
+
+/* ボタンのスタイル設定 */
+button {
+    background-color: white; /* 背景色を白に設定 */
+    border: 2px solid #696969; /* ボーダーをグレーに設定 */
+    color: #696969; /* 文字色をグレーに設定 */
+    padding: 12px 20px; /* 内側の余白を12px 20pxに設定 */
+    text-align: center; /* テキストを中央揃えに設定 */
+    text-decoration: none; /* テキストの下線をなしに設定 */
+    display: inline-block; /* インラインブロック要素に設定 */
+    font-size: 16px; /* フォントサイズを16pxに設定 */
+    margin: 8px 0; /* 上下のマージンを8pxに設定 */
+    cursor: pointer; /* カーソルをポインターに設定 */
+    border-radius: 4px; /* 角を丸く設定 */
+    transition-duration: 0.4s; /* トランジションの時間を0.4秒に設定 */
+    height: 48px; /* 高さを48pxに設定 */
+}
+
+button:hover {
+    background-color: #696969; /* ホバー時の背景色をグレーに設定 */
+    color: white; /* ホバー時の文字色を白に設定 */
+    border: 2px solid #696969; /* ホバー時のボーダーをグレーに設定 */
+}
+
+/* 検索欄のスタイル設定 */
+input[type="text"] {
+    width: 300px; /* 幅を300pxに設定 */
+    padding: 12px 20px; /* 内側の余白を12px 20pxに設定 */
+    margin: 8px 0; /* 上下のマージンを8pxに設定 */
+    box-sizing: border-box; /* ボックスサイズの調整 */
+    border: 2px solid #696969; /* ボーダーをグレーに設定 */
+    border-radius: 4px; /* 角を丸く設定 */
+    font-size: 16px; /* フォントサイズを16pxに設定 */
+    transition: border-color 0.4s; /* ボーダー色のトランジションを0.4秒に設定 */
+    height: 48px; /* 高さを48pxに設定 */
+}
+
+input[type="text"]:focus {
+    border-color: #696969; /* フォーカス時のボーダー色をグレーに設定 */
+    outline: none; /* フォーカス時のアウトラインをなしに設定 */
+}
+
+/* ボタンと検索欄のコンテナの整列 */
+.search-container {
+    display: flex; /* フレックスボックスで配置 */
+    align-items: center; /* 中央に揃える */
 }

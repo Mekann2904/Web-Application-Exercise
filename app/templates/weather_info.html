@@ -1,4 +1,7 @@
-<!DOCTYPE html> {% extends "base.html" %} {% block content %} <div class="title">天気予報</div>
+<!DOCTYPE html> 
+{% extends "base.html" %} 
+{% block content %} 
+<h1>天気予報</h1>
 <div class="weather-container">
 	<div class="weather-card">
 		<div class="weather-icon" id="weather-icon-today">Weather Icon</div>
@@ -15,5 +18,6 @@
 		<div class="weather-condition" id="weather-condition-tomorrow">--</div>
 	</div>
 </div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/weather_info.css') }}">
 <script src="{{ url_for('static', filename='js/weather_info_scripts.js') }}"></script>
 <script src="{{ url_for('static', filename='js/city.js') }}"></script> {% endblock %}
