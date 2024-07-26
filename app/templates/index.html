@@ -1,32 +1,30 @@
-<!DOCTYPE html> {% extends "base.html" %} {% block content %} <div class="content">
-	<div class="search-container" style="position: absolute; top: 10px; left: 10px;">
-		<input type="text" id="location-search" placeholder="位置情報を検索..." />
-		<button onclick="searchLocation()">検索</button>
-	</div>
-	<div class="left">
-		<div class="weather-info">
-			<iframe src="{{ url_for('weather_info') }}" class="iframe-full"></iframe>
-		</div>
-		<div class="disaster-prevention-links">
-			<iframe src="{{ url_for('disaster_prevention_links') }}" class="iframe-full"></iframe>
-		</div>
-	</div>
-	<div class="right">
-		<div class="geo-info">
-			<iframe src="{{ url_for('geo_info') }}" class="iframe-full"></iframe>
-		</div>
-		<div class="route-info">
-			<iframe src="{{ url_for('route_info') }}" class="iframe-full"></iframe>
-		</div>
-	</div>
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class="search-container" style="position: absolute; top: 10px; left: 10px;">
+        <input type="text" id="location-search" placeholder="位置情報を検索..." />
+        <button onclick="searchLocation()">検索</button>
+    </div>
+    <div class="left">
+        <div class="weather-info">
+            <iframe src="{{ url_for('weather_info') }}" class="iframe-full"></iframe>
+        </div>
+        <div class="disaster-prevention-links">
+            <iframe src="{{ url_for('disaster_prevention_links') }}" class="iframe-full"></iframe>
+        </div>
+    </div>
+    <div class="right">
+        <div class="geo-info">
+            <iframe src="{{ url_for('geo_info') }}" class="iframe-full"></iframe>
+        </div>
+        <div class="route-info">
+            <iframe src="{{ url_for('route_info') }}" class="iframe-full"></iframe>
+        </div>
+    </div>
 </div>
-<script>
-	function searchLocation() {
-		const location = document.getElementById('location-search').value;
-		// ここで位置情報を検索するコード追加？
-		alert('検索中: ' + location);
-	}
-</script> {% endblock %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="{{ url_for('static', filename='js/style.js') }}"></script>
-<script src="{{ url_for('static', filename='js/city.js') }}"></script> {% endblock %}
+<script src="{{ url_for('static', filename='js/city.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
