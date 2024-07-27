@@ -40,43 +40,71 @@
 
 このプロジェクトは、防災アプリケーションを開発するためのテンプレートです。ユーザーは地理情報を入力し、天気情報を取得して表示し、最寄りの避難場所とその経路を確認することができます。
 
+
+
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## 環境
 
-| 技術       | バージョン |
-| ---------- | ---------- |
-| Python     | 3.11.4     |
-| Flask      | 2.3.2      |
-| Jinja2     | 3.1.2      |
-| SQLite     | 3.39.3     |
-| HTML/CSS/JavaScript | 最新版 |
+| 技術                   | バージョン |
+| ---------------------- | ---------- |
+| Python                 | 3.10.0     |
+| Flask                  | 2.3.2      |
+| Flask-SQLAlchemy       | 2.5.0      |
+| Requests               | 2.25.0     |
+| BeautifulSoup4         | 4.9.0      |
+| Unidecode              | 1.1.1      |
+| Pandas                 | 1.1.0      |
+| SQLite                 | 3.39.3     |
+| HTML/CSS/JavaScript    | 最新版     |
+
+---
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## ディレクトリ構成
 
 ```plaintext
-project_root/
-├── app/
+.
+├── README.md
+├── __pycache__
+│   └── config.cpython-38.pyc
+├── app
 │   ├── __init__.py
-│   ├── routes.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── models.cpython-38.pyc
+│   │   └── routes.cpython-38.pyc
 │   ├── models.py
-│   ├── static/
-│   │   ├── css/
+│   ├── routes.py
+│   ├── static
+│   │   ├── css
+│   │   │   ├── disaster_prevention_links.css
+│   │   │   ├── geo_info.css
+│   │   │   ├── route_info.css
 │   │   │   ├── styles.css
-│   │   ├── js/
-│   │   │   ├── scripts.js
-│   ├── templates/
-│   │   ├── base.html
-│   │   ├── geo_info.html
-│   │   ├── weather_info.html
-│   │   ├── evacuation_info.html
-│   │   └── route_info.html
+│   │   │   └── weather_info.css
+│   │   └── js
+│   │       ├── city.js
+│   │       ├── dbviewer.js
+│   │       ├── index.js
+│   │       └── weather_info_scripts.js
+│   └── templates
+│       ├── base.html
+│       ├── disaster_prevention_links.html
+│       ├── geo_info.html
+│       ├── index.html
+│       ├── route_info.html
+│       └── weather_info.html
 ├── config.py
-├── run.py
+├── database.db
+├── evacuation_site.json
+├── instance
+│   └── app.db
+├── json_to_sqlite.py
 ├── requirements.txt
-└── README.md
+├── run.py
+└── shelters.db
 ```
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
@@ -91,15 +119,8 @@ project_root/
    pip install -r requirements.txt
    ```
 
-2. **データベースのセットアップ**
 
-   SQLite データベースを作成します。
-
-   ```bash
-   python run.py setup_db
-   ```
-
-3. **アプリケーションの起動**
+2. **アプリケーションの起動**
 
    アプリケーションを起動します。
 
@@ -107,7 +128,7 @@ project_root/
    python run.py
    ```
 
-4. **アクセス**
+3. **アクセス**
 
    ブラウザで以下のURLにアクセスします。
 
