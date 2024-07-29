@@ -241,7 +241,6 @@ sequenceDiagram
     participant SQLite
 
     User->>GeoInputScreen: 地理情報を手動で入力
-    GeoInputScreen->>GeoInputScreen: バリデーション
     GeoInputScreen->>User: エラーメッセージ (入力が無効な場合)
     GeoInputScreen->>SQLite: 地理情報を保存 (入力が有効な場合)
     SQLite->>GeoInputScreen: 保存完了の応答
