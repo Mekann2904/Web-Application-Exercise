@@ -241,10 +241,10 @@ sequenceDiagram
     participant SQLite
 
     User->>GeoInputScreen: 地理情報を手動で入力
-    GeoInputScreen->>User: エラーメッセージ (入力が無効な場合)
-    GeoInputScreen->>SQLite: 地理情報を保存 (入力が有効な場合)
+    GeoInputScreen->>SQLite: 地理情報を保存 
     SQLite->>GeoInputScreen: 保存完了の応答
     GeoInputScreen->>User: 保存完了の通知
+
 ```
 
 **天気情報表示の処理フロー**
