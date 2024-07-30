@@ -53,7 +53,6 @@
 | Flask-SQLAlchemy       | 2.5.0      |
 | Requests               | 2.25.0     |
 | BeautifulSoup4         | 4.9.0      |
-| Unidecode              | 1.1.1      |
 | Pandas                 | 1.1.0      |
 | SQLite                 | 3.39.3     |
 | HTML/CSS/JavaScript    | 最新版     |
