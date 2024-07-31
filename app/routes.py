@@ -160,13 +160,19 @@ def init_routes(app):
         
         if last_location:
             location = last_location[0]
-            # 「県」で区切られる部分の後に文字列が続くかをチェック
-            match = re.search(r'県(.+)', location)
-            if match:
-                # 「県」の後に文字列が続く場合のみ処理する
-                location_without_prefecture = match.group(1)  # 県の後の部分を抽出
-                city_match = re.search(r'(.+市)', location_without_prefecture)
-                
+
+            # まず「〇〇県」が存在するかを確認
+            if re.search(r'.+県', location):
+                # 「県」で区切られる部分の後に文字列が続くかをチェック
+                match = re.search(r'県(.+)', location)
+                if match:
+                    # 「県」の後に文字列が続く場合のみ処理する
+                    location_without_prefecture = match.group(1)  # 県の後の部分を抽出
+                    city_match = re.search(r'(.+市)', location_without_prefecture)
+                    if city_match:
+                        location = city_match.group(0)  # 「〇〇市」部分を取り出す
+            else:
+                city_match = re.search(r'(.+市)', location)
                 if city_match:
                     location = city_match.group(0)  # 「〇〇市」部分を取り出す
 
