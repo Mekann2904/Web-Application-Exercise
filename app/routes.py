@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import config
 import json
-from unidecode import unidecode
+import re
 
 app = Flask(__name__)
 
@@ -160,6 +160,17 @@ def init_routes(app):
         
         if last_location:
             location = last_location[0]
+            # 「県」で区切られる部分の後に文字列が続くかをチェック
+            match = re.search(r'県(.+)', location)
+            if match:
+                # 「県」の後に文字列が続く場合のみ処理する
+                location_without_prefecture = match.group(1)  # 県の後の部分を抽出
+                city_match = re.search(r'(.+市)', location_without_prefecture)
+                
+                if city_match:
+                    location = city_match.group(0)  # 「〇〇市」部分を取り出す
+
+
             response = requests.get(f'http://api.geonames.org/searchJSON?q={location}&maxRows=1&username={GEONAMES_USERNAME}')
             data = response.json()
             if 'geonames' in data and len(data['geonames']) > 0:
