@@ -160,7 +160,6 @@ def init_routes(app):
         
         if last_location:
             location = last_location[0]
-
             # まず「〇〇県」が存在するかを確認
             if re.search(r'.+県', location):
                 # 「県」で区切られる部分の後に文字列が続くかをチェック
@@ -171,10 +170,14 @@ def init_routes(app):
                     city_match = re.search(r'(.+市)', location_without_prefecture)
                     if city_match:
                         location = city_match.group(0)  # 「〇〇市」部分を取り出す
+                    else:
+                        # 「市」が見つからない場合は「県」を使用
+                        location = re.search(r'.+県', location).group(0)
             else:
                 city_match = re.search(r'(.+市)', location)
                 if city_match:
                     location = city_match.group(0)  # 「〇〇市」部分を取り出す
+
 
 
             response = requests.get(f'http://api.geonames.org/searchJSON?q={location}&maxRows=1&username={GEONAMES_USERNAME}')

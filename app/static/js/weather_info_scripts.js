@@ -52,6 +52,7 @@ async function fetchWeatherData() {
         document.getElementById('weather-icon-tomorrow').innerHTML = `<img src="http://openweathermap.org/img/wn/${tomorrowIcon}.png" alt="Weather Icon">`;
     } catch (error) {
         console.error('Error fetching weather data:', error);
+        document.getElementById('weather-error-message').textContent = "※自治体名が必要です(都道府県市区町村から少なくとも１つ)";
     }
 }
 
